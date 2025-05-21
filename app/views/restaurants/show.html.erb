@@ -9,14 +9,40 @@
           </h2>
 
           <ul class="list-group list-group-flush my-4">
-            <li class="list-group-item"><strong>Adresse :</strong> <%= @restaurant.address %></li>
+            <li class="list-group-item">
+              <strong>Adresse :</strong> <%= @restaurant.address %>
+            </li>
           </ul>
 
-          <div class="d-grid gap-2">
+          <div class="d-grid gap-2 mb-4">
             <%= link_to "Modifier #{@restaurant.name}", edit_restaurant_path(@restaurant), class: "btn btn-outline-primary" %>
             <%= link_to "Supprimer #{@restaurant.name}", restaurant_path(@restaurant), data: { turbo_method: :delete, turbo_confirm: "Es-tu sûr de vouloir supprimer ce restaurant ?" }, class: "btn btn-outline-danger" %>
             <%= link_to "← Retour à la liste", restaurants_path, class: "btn btn-secondary" %>
           </div>
+
+          <div class="card mt-4">
+            <div class="card-header">
+              <h5 class="mb-0">Avis des clients</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <% if @restaurant.reviews.any? %>
+                <% @restaurant.reviews.each do |review| %>
+                  <li class="list-group-item">
+                    <p class="mb-1"><%= review.content %></p>
+                    <small class="text-muted">Note : <%= review.rating %> / 5</small>
+                  </li>
+                <% end %>
+              <% else %>
+                <li class="list-group-item text-muted fst-italic">
+                  Aucun avis pour le moment.
+                </li>
+              <% end %>
+            </ul>
+            <div class="card-footer bg-light text-center">
+              <%= link_to "Écrire un avis", new_restaurant_review_path(@restaurant), class: "btn btn-outline-success mt-2" %>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

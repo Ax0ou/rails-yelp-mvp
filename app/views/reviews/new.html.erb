@@ -1,0 +1,17 @@
+<div class="card mt-5 shadow">
+  <div class="card-body">
+    <h3 class="card-title mb-4">Nouvel avis</h3>
+
+    <%= simple_form_for [@restaurant, @review] do |f| %>
+      <div class="mb-3">
+        <%= f.input :content, input_html: { class: "form-control" }, label_html: { class: "form-label" } %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.input :rating, input_html: { class: "form-control" }, label_html: { class: "form-label" } %>
+      </div>
+
+      <%= f.button :submit, "Envoyer l'avis", class: "btn btn-primary w-100" %>
+    <% end %>
+  </div>
+</div>
